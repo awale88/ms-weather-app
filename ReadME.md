@@ -40,13 +40,6 @@ mvn spring-boot:run
 mvn spring-boot:run -Dspring-boot.run.profiles=dev
 ```
 
-### Environment Variables
-
-Variable	Description	Default
-OPENWEATHER_API_KEY	OpenWeatherMap API key	(required)
-SERVER_PORT	Application port	8080
-
-
 ### Contact
 
 - LinkdedIn: 🔗https://www.linkedin.com/in/nayan-awale-933038241
