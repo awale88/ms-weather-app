@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Weather Forecast</h1>
+        <p>Get real-time weather information for any location</p>
+    </header>
+
+    <div class="search-container">
+        <div class="tabs">
+            <div class="tab active" data-tab="city">Search by City</div>
+            <div class="tab" data-tab="location">Current Location</div>
+            <div class="tab" data-tab="coordinates">Coordinates</div>
+        </div>
+
+        <div class="tab-content active" id="city-tab">
+            <div class="input-group">
+                <label for="city-input">City Name</label>
+                <input type="text" id="city-input" placeholder="Enter city name">
+            </div>
+            <button class="btn" id="search-city"><i class="fas fa-search"></i> Search</button>
+        </div>
+
+        <div class="tab-content" id="location-tab">
+            <p>Get weather for your current location</p>
+            <button class="btn" id="get-location" style="margin-top: 15px;"><i class="fas fa-location-arrow"></i> Get My Location Weather</button>
+        </div>
+
+        <div class="tab-content" id="coordinates-tab">
+            <div class="input-group">
+                <label for="lat-input">Latitude</label>
+                <input type="number" id="lat-input" placeholder="Enter latitude" step="any">
+            </div>
+            <div class="input-group">
+                <label for="lon-input">Longitude</label>
+                <input type="number" id="lon-input" placeholder="Enter longitude" step="any">
+            </div>
+            <button class="btn" id="search-coords"><i class="fas fa-map-marker-alt"></i> Get Weather</button>
+        </div>
+    </div>
+
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>Loading weather data...</p>
+    </div>
+
+    <div class="error-message" id="error-message"></div>
+
+    <div class="weather-display" id="weather-display">
+        <div class="current-weather">
+            <div class="weather-main">
+                <div class="weather-icon">
+                    <i class="fas fa-sun" id="weather-icon"></i>
+                </div>
+                <div class="weather-info">
+                    <h2 id="city-name">City Name</h2>
+                    <p id="country-name">Country Name</p>
+                    <p id="weather-description">Clear sky</p>
+                    <h1 id="temperature">25°C</h1>
+                </div>
+            </div>
+            <div class="weather-date">
+                <p id="current-date">Monday, June 12, 2023</p>
+                <p id="current-time">10:30 AM</p>
+            </div>
+        </div>
+
+        <div class="weather-details">
+            <div class="detail-card">
+                <h3>FEELS LIKE</h3>
+                <p id="feels-like">26°C</p>
+            </div>
+            <div class="detail-card">
+                <h3>HUMIDITY</h3>
+                <p id="humidity">65%</p>
+            </div>
+            <div class="detail-card">
+                <h3>WIND SPEED</h3>
+                <p id="wind-speed">5.2 km/h</p>
+            </div>
+            <div class="detail-card">
+                <h3>PRESSURE</h3>
+                <p id="pressure">1015 hPa</p>
+            </div>
+        </div>
+
+        <h2 style="margin: 30px 0 15px; color: #555;">5-Day Forecast</h2>
+        <div class="forecast" id="forecast-container">
+            <!-- Forecast cards will be generated here -->
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
