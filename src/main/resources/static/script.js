@@ -154,6 +154,9 @@ function resetWeatherDisplay() {
             hour: '2-digit', minute: '2-digit'
         });
 
+        // Generate forecast (mock data for now as your API might not provide forecast)
+        generateForecast();
+
         // Show weather display
         weatherDisplay.classList.add('active');
     }
@@ -190,6 +193,36 @@ function resetWeatherDisplay() {
 
         // Set appropriate icon
         element.classList.add(iconMap[iconCode] || 'fa-cloud');
+    }
+
+    // Generate forecast (mock data for demonstration)
+    function generateForecast() {
+        const forecastContainer = document.getElementById('forecast-container');
+        forecastContainer.innerHTML = '';
+
+        const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const today = new Date();
+
+        for (let i = 1; i <= 5; i++) {
+            const nextDay = new Date(today);
+            nextDay.setDate(today.getDate() + i);
+
+            const dayName = days[nextDay.getDay()];
+            const minTemp = Math.floor(Math.random() * 10) + 15; // Random between 15-24
+            const maxTemp = minTemp + Math.floor(Math.random() * 8) + 3; // Random between min+3 to min+10
+
+            const forecastCard = document.createElement('div');
+            forecastCard.classList.add('forecast-card');
+            forecastCard.innerHTML = `
+                <h3>${dayName}</h3>
+                <div class="forecast-icon">
+                    <i class="fas fa-cloud-sun"></i>
+                </div>
+                <div class="forecast-temp">${maxTemp}°C / ${minTemp}°C</div>
+                <div class="forecast-desc">Partly cloudy</div>
+            `;
+            forecastContainer.appendChild(forecastCard);
+        }
     }
 
     // Show error message
