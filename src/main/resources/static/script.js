@@ -8,7 +8,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const loadingElement = document.getElementById('loading');
     const weatherDisplay = document.getElementById('weather-display');
     const errorMessage = document.getElementById('error-message');
+    
+    // Reset button for City tab
+document.getElementById('reset-button').addEventListener('click', () => {
+    document.getElementById('city-input').value = '';
+    resetWeatherDisplay();
+});
 
+// Reset button for Location tab
+document.getElementById('reset-location').addEventListener('click', () => {
+    resetWeatherDisplay();
+});
+
+// Reset button for Coordinates tab
+document.getElementById('reset-coords').addEventListener('click', () => {
+    document.getElementById('lat-input').value = '';
+    document.getElementById('lon-input').value = '';
+    resetWeatherDisplay();
+});
+
+// Helper function to reset weather and error display
+function resetWeatherDisplay() {
+    weatherDisplay.classList.remove('active');
+    errorMessage.classList.remove('active');
+}
+        
     // Tab switching
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
@@ -48,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 position => {
                     const lat = position.coords.latitude;
                     const lon = position.coords.longitude;
-                    fetchWeather(`/api/weather/location`);
+                    fetchWeather(`/api/weather/coordinates?lat=${lat}&lon=${lon}`);
                 },
                 error => {
                     loadingElement.classList.remove('active');
@@ -130,9 +154,6 @@ document.addEventListener('DOMContentLoaded', function() {
             hour: '2-digit', minute: '2-digit'
         });
 
-        // Generate forecast (mock data for now as your API might not provide forecast)
-        generateForecast();
-
         // Show weather display
         weatherDisplay.classList.add('active');
     }
@@ -169,36 +190,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Set appropriate icon
         element.classList.add(iconMap[iconCode] || 'fa-cloud');
-    }
-
-    // Generate forecast (mock data for demonstration)
-    function generateForecast() {
-        const forecastContainer = document.getElementById('forecast-container');
-        forecastContainer.innerHTML = '';
-
-        const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-        const today = new Date();
-
-        for (let i = 1; i <= 5; i++) {
-            const nextDay = new Date(today);
-            nextDay.setDate(today.getDate() + i);
-
-            const dayName = days[nextDay.getDay()];
-            const minTemp = Math.floor(Math.random() * 10) + 15; // Random between 15-24
-            const maxTemp = minTemp + Math.floor(Math.random() * 8) + 3; // Random between min+3 to min+10
-
-            const forecastCard = document.createElement('div');
-            forecastCard.classList.add('forecast-card');
-            forecastCard.innerHTML = `
-                <h3>${dayName}</h3>
-                <div class="forecast-icon">
-                    <i class="fas fa-cloud-sun"></i>
-                </div>
-                <div class="forecast-temp">${maxTemp}°C / ${minTemp}°C</div>
-                <div class="forecast-desc">Partly cloudy</div>
-            `;
-            forecastContainer.appendChild(forecastCard);
-        }
     }
 
     // Show error message
